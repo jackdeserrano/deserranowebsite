@@ -3,62 +3,62 @@
 // https://stackoverflow.com/questions/14541988/gedcom-parser-in-javascript
 // also add up to date gedcom/gramps file to website 
 
-const fs = require('fs');
+const fs = require("fs");
 
-const FILE = fs.readFileSync('dec252023.ged').toString();
+const FILE = fs.readFileSync("dec252023.ged").toString();
 const NAMES = index_names(FILE);
 
 var ind = /0 (?:(@[_A-Z0-9]*@) )?INDI/;
 
 function get_some_first_names(file) {
-    var thing = file.split(/\n0.*\n/);
-    var ching = [];
-    thing.forEach((line) => {
-        ching.push(line.split(' ')[2]);
-    });
-    return ching;
+  var thing = file.split(/\n0.*\n/);
+  var ching = [];
+  thing.forEach((line) => {
+    ching.push(line.split(" ")[2]);
+  });
+  return ching;
 }
 
 function split_by_indiviual(file) {
-    var thing = file.split(/0 (?:(@[_A-Z0-9]*@) )INDI/);
-    thing.shift();
-    return thing;
+  var thing = file.split(/0 (?:(@[_A-Z0-9]*@) )INDI/);
+  thing.shift();
+  return thing;
 }
 
 function index_names(file) {
-    return file.match(/0 (?:(@[_A-Z0-9]*@) )INDI\n1 NAME [a-zA-Z\u00C0-\u024F\u1E00-\u1EFF ,.'-/]+/g);
+  return file.match(/0 (?:(@[_A-Z0-9]*@) )INDI\n1 NAME [a-zA-Z\u00C0-\u024F\u1E00-\u1EFF ,.'-/]+/g);
 }
 
 function getting_sub_of_exec_result(reg, str, sub = 0) {
-    if (reg.exec(str) === null) {
-        return null;
-    } else {
-        return (reg.exec(str)[0]).slice(sub);
-    }
+  if (reg.exec(str) === null) {
+    return null;
+  } else {
+    return (reg.exec(str)[0]).slice(sub);
+  }
 }
 
 function getting_sub_of_match_result(reg, str, sub = 0) {
-    if (str.match(reg) === null) {
-        return null;
-    } else {
-        return (str.match(reg)).map(m => m.slice(sub));
-    }
+  if (str.match(reg) === null) {
+    return null;
+  } else {
+    return (str.match(reg)).map(m => m.slice(sub));
+  }
 }
 
 function index_given_id(id) {
-    const no = indBlocks.length;
+  const no = indBlocks.length;
     
-    for (var i = 0; i < no; ++i) {
-        if (individuals[i].id === id) {
-            return i;
-        }
-    } 
+  for (var i = 0; i < no; ++i) {
+    if (individuals[i].id === id) {
+      return i;
+    }
+  } 
 
-    return null;
+  return null;
 }
 
 function sort_by_dob(arr_of_inds) {
-    return arr_of_inds;
+  return arr_of_inds;
 }
 
 // then think about making index_names a simple application of the global const gotten from this
@@ -83,13 +83,13 @@ const findNickname = /2 NICK [a-zA-Z\u00C0-\u024F\u1E00-\u1EFF ,.'-]+/;
 const findSex = /1 SEX (M|F)/;
 
 const ids = indBlocks.map(i => getting_sub_of_exec_result(findId, i));
-const GEDNames = indBlocks.map(i => getting_sub_of_exec_result(findGEDName, i, 7).replace(/\//g,'')); // 7 is length of "1 NAME "
+const GEDNames = indBlocks.map(i => getting_sub_of_exec_result(findGEDName, i, 7).replace(/\//g,"")); // 7 is length of "1 NAME "
 const givenNames = nameBlocks.map(nb => getting_sub_of_exec_result(findGivenName, nb[0], 7)); // 7 is length of "2 GIVN "
 const notMarriedGivenNames = nameBlocks.map(nb => 
-    ((nb.length === 2) ? getting_sub_of_exec_result(findGivenName, nb[1], 7) : null)); // 7 is length of "2 GIVN ";
+  ((nb.length === 2) ? getting_sub_of_exec_result(findGivenName, nb[1], 7) : null)); // 7 is length of "2 GIVN ";
 const surnames = nameBlocks.map(nb => getting_sub_of_exec_result(findSurname, nb[0], 7)); // 7 is length of "2 SURN "
 const notMarriedSurnames = nameBlocks.map(nb => 
-    ((nb.length === 2) ? getting_sub_of_exec_result(findSurname, nb[1], 7) : null)); // 7 is length of "2 SURN "
+  ((nb.length === 2) ? getting_sub_of_exec_result(findSurname, nb[1], 7) : null)); // 7 is length of "2 SURN "
 const nicknames = indBlocks.map(i => getting_sub_of_exec_result(findNickname, i, 7));// 7 is length of "2 NICK "
 const sexes = indBlocks.map(i => getting_sub_of_exec_result(findSex, i, 6)); // 6 is length of "1 SEX "
 
@@ -118,20 +118,20 @@ var individuals = [];
 const number_of_individuals = indBlocks.length;
 
 for (var i = 0; i < number_of_individuals; ++i) {
-    individuals[i] = {
-        "id" : ids[i], // making json resulting iterable.
-        "GEDName" : GEDNames[i],
-        "givenName" : givenNames[i],
-        "surname" : surnames[i],
-        "nickname" : nicknames[i],
-        "notMarriedGivenName" : notMarriedGivenNames[i],
-        "notMarriedSurname" : notMarriedSurnames[i],
-        "sex" : sexes[i],
-        "birthDate" : birthDates[i],
-        "birthPlace" : birthPlaces[i],
-        "deathDate" : deathDates[i],
-        "deathPlace" : deathPlaces[i],
-    }
+  individuals[i] = {
+    "id" : ids[i],
+    "GEDName" : GEDNames[i],
+    "givenName" : givenNames[i],
+    "surname" : surnames[i],
+    "nickname" : nicknames[i],
+    "notMarriedGivenName" : notMarriedGivenNames[i],
+    "notMarriedSurname" : notMarriedSurnames[i],
+    "sex" : sexes[i],
+    "birthDate" : birthDates[i],
+    "birthPlace" : birthPlaces[i],
+    "deathDate" : deathDates[i],
+    "deathPlace" : deathPlaces[i],
+  }
 }
 
 
@@ -150,106 +150,113 @@ const children = famBlocks.map(f => getting_sub_of_match_result(findChild, f, 7)
 const number_of_families = famBlocks.length;
 // add multiple families under same person functionality later
 for  (var i = 0; i < number_of_families; ++i) { // add marriage date functionality
-    var husband_of_family = husbands[i];
-    var wife_of_family = wives[i];
-    var children_of_family = children[i];
+  var husband_of_family = husbands[i];
+  var wife_of_family = wives[i];
+  var children_of_family = children[i];
 
-    let husband_index = index_given_id(husbands[i]);
-    let wife_index = index_given_id(wives[i]);
+  let husband_index = index_given_id(husbands[i]);
+  let wife_index = index_given_id(wives[i]);
 
-    if (husband_of_family !== null && wife_of_family !== null) {
+  if (husband_of_family !== null && wife_of_family !== null) {
 
-        if (individuals[husband_index].families == null) {
-            individuals[husband_index].families = [[wives[i]]];
-            individuals[husband_index].familiesNames = [[individuals[wife_index].GEDName]];
-        } else {
-            individuals[husband_index].families.push([wives[i]]);
-            individuals[husband_index].familiesNames.push([individuals[wife_index].GEDName]);
-        }
-        var no_of_families_to_husband = individuals[husband_index].families.length;
-        individuals[husband_index].families[no_of_families_to_husband - 1].push(children_of_family);
-
-        if (individuals[wife_index].families == null) {
-            individuals[wife_index].families = [[husbands[i]]];
-            individuals[wife_index].familiesNames = [[individuals[husband_index].GEDName]];
-        } else {
-            individuals[wife_index].families.push([husbands[i]]);
-            individuals[wife_index].familiesNames.push([individuals[husband_index].GEDName]);
-        }
-        var no_of_families_to_wife = individuals[wife_index].families.length;
-        individuals[wife_index].families[no_of_families_to_wife - 1].push(children_of_family);
-
-        if (children_of_family !== null) {
-            var children_names_of_family = children_of_family.map(c => individuals[index_given_id(c)].GEDName)
-            individuals[husband_index].familiesNames[no_of_families_to_husband - 1].push(children_names_of_family);
-            individuals[wife_index].familiesNames[no_of_families_to_wife - 1].push(children_names_of_family);
-        } else {
-            individuals[husband_index].familiesNames[no_of_families_to_husband - 1].push(null);
-            individuals[wife_index].familiesNames[no_of_families_to_wife - 1].push(null);
-        }
-
-    } else if (husbands[i] !== null) {
-
-        // check if null or not (null or array)
-        if (individuals[husband_index].families == null) {
-            var no_of_families_to_husband = 1;
-            individuals[husband_index].families = [[null]];
-            individuals[husband_index].familiesNames = [[null]];
-        } else {
-            var no_of_families_to_husband = individuals[husband_index].families.push([[null]]);
-            individuals[husband_index].familiesNames.push([[null]]);
-        }
-        try {
-            individuals[husband_index].families[no_of_families_to_husband - 1].push(children_of_family);
-        } catch {
-            console.error(individuals[husband_index]);
-        }
-
-        if (children_of_family !== null) {
-            var children_names_of_family = children_of_family.map(c => individuals[index_given_id(c)].GEDName)
-            individuals[husband_index].familiesNames[no_of_families_to_husband - 1].push(children_names_of_family);
-        } else {
-            individuals[husband_index].familiesNames[no_of_families_to_husband - 1].push(null);
-        }
-    } else if (wives[i] !== null) {
-
-        if (individuals[wife_index].families == null) {
-            individuals[wife_index].families = [[null]];
-            individuals[wife_index].familiesNames = [[null]]; //
-        } else {
-            individuals[wife_index].families.push([[null]]);
-            individuals[wife_index].familiesNames.push([[null]]);
-        }
-
-        var no_of_families_to_wife = individuals[wife_index].families.length;
-        individuals[wife_index].families[no_of_families_to_wife - 1].push(children_of_family);
-        if (children_of_family !== null) {
-            var children_names_of_family = children_of_family.map(c => individuals[index_given_id(c)].GEDName)
-            individuals[wife_index].familiesNames[no_of_families_to_wife - 1].push(children_names_of_family);
-        } else {
-            individuals[wife_index].familiesNames[no_of_families_to_wife - 1].push(null);
-        }
-    } if (children_of_family !== null) {
-        for (c of children_of_family) {
-            individuals[index_given_id(c)].parents = [husbands[i], wives[i]].filter(x => x !== null);
-            if (husbands[i] !== null) {
-                var dad_name = individuals[husband_index].GEDName;
-            } else {
-                var dad_name = null;
-            } if (wives[i] !== null) {
-                var mom_name = individuals[wife_index].GEDName;
-            } else {
-                var mom_name = null;
-            }
-            individuals[index_given_id(c)].parentsNames = [dad_name, mom_name].filter(x => x !== null);
-        }
+    if (individuals[husband_index].families == null) {
+      individuals[husband_index].families = [[wives[i]]];
+      individuals[husband_index].familiesNames = [[individuals[wife_index].GEDName]];
+    } else {
+      individuals[husband_index].families.push([wives[i]]);
+      individuals[husband_index].familiesNames.push([individuals[wife_index].GEDName]);
     }
+
+    var no_of_families_to_husband = individuals[husband_index].families.length;
+    individuals[husband_index].families[no_of_families_to_husband - 1].push(children_of_family);
+
+    if (individuals[wife_index].families == null) {
+      individuals[wife_index].families = [[husbands[i]]];
+      individuals[wife_index].familiesNames = [[individuals[husband_index].GEDName]];
+    } else {
+      individuals[wife_index].families.push([husbands[i]]);
+      individuals[wife_index].familiesNames.push([individuals[husband_index].GEDName]);
+    }
+
+    var no_of_families_to_wife = individuals[wife_index].families.length;
+    individuals[wife_index].families[no_of_families_to_wife - 1].push(children_of_family);
+
+    if (children_of_family !== null) {
+      var children_names_of_family = children_of_family.map(c => individuals[index_given_id(c)].GEDName)
+      individuals[husband_index].familiesNames[no_of_families_to_husband - 1].push(children_names_of_family);
+      individuals[wife_index].familiesNames[no_of_families_to_wife - 1].push(children_names_of_family);
+    } else {
+      individuals[husband_index].familiesNames[no_of_families_to_husband - 1].push(null);
+      individuals[wife_index].familiesNames[no_of_families_to_wife - 1].push(null);
+    }
+
+  } else if (husbands[i] !== null) {
+
+    // check if null or not (null or array)
+    if (individuals[husband_index].families == null) {
+      var no_of_families_to_husband = 1;
+      individuals[husband_index].families = [[null]];
+      individuals[husband_index].familiesNames = [[null]];
+    } else {
+      var no_of_families_to_husband = individuals[husband_index].families.push([[null]]);
+      individuals[husband_index].familiesNames.push([[null]]);
+    }
+
+    try {
+      individuals[husband_index].families[no_of_families_to_husband - 1].push(children_of_family);
+    } catch {
+      console.error(individuals[husband_index]);
+    }
+
+    if (children_of_family !== null) {
+      var children_names_of_family = children_of_family.map(c => individuals[index_given_id(c)].GEDName)
+      individuals[husband_index].familiesNames[no_of_families_to_husband - 1].push(children_names_of_family);
+    } else {
+      individuals[husband_index].familiesNames[no_of_families_to_husband - 1].push(null);
+    }
+
+  } else if (wives[i] !== null) {
+
+    if (individuals[wife_index].families == null) {
+      individuals[wife_index].families = [[null]];
+      individuals[wife_index].familiesNames = [[null]]; //
+    } else {
+      individuals[wife_index].families.push([[null]]);
+      individuals[wife_index].familiesNames.push([[null]]);
+    }
+
+    var no_of_families_to_wife = individuals[wife_index].families.length;
+    individuals[wife_index].families[no_of_families_to_wife - 1].push(children_of_family);
+    if (children_of_family !== null) {
+      var children_names_of_family = children_of_family.map(c => individuals[index_given_id(c)].GEDName)
+      individuals[wife_index].familiesNames[no_of_families_to_wife - 1].push(children_names_of_family);
+    } else {
+      individuals[wife_index].familiesNames[no_of_families_to_wife - 1].push(null);
+    }
+
+  } if (children_of_family !== null) {
+
+    for (c of children_of_family) {
+      individuals[index_given_id(c)].parents = [husbands[i], wives[i]].filter(x => x !== null);
+      if (husbands[i] !== null) {
+        var dad_name = individuals[husband_index].GEDName;
+      } else {
+        var dad_name = null;
+      } if (wives[i] !== null) {
+        var mom_name = individuals[wife_index].GEDName;
+      } else {
+        var mom_name = null;
+      }
+      
+      individuals[index_given_id(c)].parentsNames = [dad_name, mom_name].filter(x => x !== null);
+    }
+  }
 }
 
 let individuals_dictionary = new Object();
 
 for (var i = 0; i < number_of_individuals; ++i) {
-    individuals_dictionary[ids[i]] = individuals[i];
+  individuals_dictionary[ids[i]] = individuals[i];
 }
 
 var __new = individuals_dictionary;
@@ -275,7 +282,8 @@ let photos_json = fs.readFileSync("photos.json");
 
 let photos = JSON.parse(photos_json);
 
-let to_osoby = `<html>
+let to_osoby = 
+`<html>
 
 <head>
 <meta charset="UTF-8">
@@ -318,7 +326,7 @@ for (const person of display_names) {
 
 to_osoby += "\n</p>\n\n</body>\n\n</html>\n";
 
-fs.writeFile(`osoby.htm`, to_osoby, (err) => { if (err) console.log(err); });
+fs.writeFile("osoby.htm", to_osoby, (err) => { if (err) console.log(err); });
 
 
 
@@ -338,7 +346,8 @@ fs.writeFile(`osoby.htm`, to_osoby, (err) => { if (err) console.log(err); });
 
 
 function generate_page_from_id(id) {
-  let h = `<html>
+  let h = 
+`<html>
 
 <head>
 <meta charset="UTF-8">
@@ -366,7 +375,7 @@ a:hover{color:#8866FF}
     }
 
     if (__new[id]["deathDate"] != null) {
-        h += '\n<br>\n'
+        h += "\n<br>\n";
     }
 
   }
@@ -380,13 +389,13 @@ a:hover{color:#8866FF}
 
   }
 
-  h += '\n</p>\n\n<p>\n'
+  h += "\n</p>\n\n<p>\n";
 
   if (__new[id]["parents"] != null && __new[id]["parents"][0] != null) {
     h += `Father: <a href="${__new[id]["parents"][0]}.htm">${__new[id]["parentsNames"][0]}</a>`;
 
     if (__new[id]["parents"][1] != null) {
-      h += '\n<br>\n'
+      h += "\n<br>\n";
     }
   }
 
@@ -394,15 +403,16 @@ a:hover{color:#8866FF}
     h += `Mother: <a href="${__new[id]["parents"][1]}.htm">${__new[id]["parentsNames"][1]}</a>`;
   }
 
-  h += '\n</p>\n\n';
+  h += "\n</p>\n\n";
 
   if (__new[id]["families"] != null) {
+
     for (var i = 0; i < __new[id]["families"].length; ++i) {
 
       let spouse = __new[id]["families"][i][0];
       let spouse_name = __new[id]["familiesNames"][i][0];
 
-      h += '<p>\n';
+      h += "<p>\n";
 
       if (spouse != null) {
         h += `Partner: <a href="${spouse}.htm">${spouse_name}</a>\n<br>\n`;
@@ -412,15 +422,17 @@ a:hover{color:#8866FF}
       let children_names = __new[id]["familiesNames"][i][1];
 
       if (children != null && children.length !== 0) {
-        h += `Children:<br>`;
+        h += "Children:<br>";
         for (var j = 0; j < children.length; ++j) {
           h += `<a href="${children[j]}.htm">${children_names[j]}</a>\n<br>\n`;
         }
       }
 
-      h += '</p>\n\n'
+      h += "</p>\n\n"
     }
   }
+
+  // maybe add siblings for the gizela matuščinová case
 
   // add description here
 
@@ -432,12 +444,7 @@ a:hover{color:#8866FF}
 
   // maybe instead have one photo and then a view photos thing
 
-
-
-  h += `</body>
-
-</html>
-`;
+  h += "</body>\n\n</html>\n";
 
   return h;
 
