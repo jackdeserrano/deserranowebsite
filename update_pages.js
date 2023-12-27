@@ -271,6 +271,10 @@ var __new = individuals_dictionary;
 
 
 
+let photos_json = fs.readFileSync("photos.json");
+
+let photos = JSON.parse(photos_json);
+
 let to_osoby = `<html>
 
 <head>
@@ -417,6 +421,18 @@ a:hover{color:#8866FF}
       h += '</p>\n\n'
     }
   }
+
+  // add description here
+
+  for (photo of photos) {
+    if (photo["links"].includes(id)) {
+        h += `<a href="../photos/${photo["path"]}" target="_blank">\n<img src="../photos/${photo["path"]}" height="500">\n</a>\n\n`
+    }
+  }
+
+  // maybe instead have one photo and then a view photos thing
+
+
 
   h += `</body>
 
