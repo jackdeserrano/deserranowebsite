@@ -5,7 +5,7 @@
 
 const fs = require("fs");
 
-const FILE = fs.readFileSync("dec252023.ged").toString();
+const FILE = fs.readFileSync("dec302023.ged").toString();
 const NAMES = index_names(FILE);
 
 var ind = /0 (?:(@[_A-Z0-9]*@) )?INDI/;
@@ -259,7 +259,51 @@ for (var i = 0; i < number_of_individuals; ++i) {
   individuals_dictionary[ids[i]] = individuals[i];
 }
 
-var __new = individuals_dictionary;
+const __new = individuals_dictionary;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let descriptions_json = JSON.parse(fs.readFileSync("descriptions.json"));
+
+let descriptions = new Object();
+
+let updated_descriptions = [];
+
+for (var i = 0; i < descriptions_json.length; ++i) {
+  descriptions[descriptions_json[i]["id"]] = descriptions_json[i];
+}
+
+for (var i = 0; i < number_of_individuals; ++i) {
+  if (descriptions[ids[i]] == null) {
+    descriptions[ids[i]] = {id: ids[i], description: ""};
+  }
+  updated_descriptions.push(descriptions[ids[i]]);
+}
+
+updated_descriptions = JSON.stringify(updated_descriptions, null, 2);
+
+fs.writeFileSync("descriptions.json", updated_descriptions);
+
+
+
+
+
+
+
+
+
 
 
 
@@ -287,7 +331,7 @@ let to_osoby =
 
 <head>
 <meta charset="UTF-8">
-<title>Sol&iacute;novi</title>
+<title>FAMILY</title>
 <base target = "hlavni">
 <style>
 a:link{text-decoration: none}
@@ -375,7 +419,7 @@ a:hover{color:#8866FF}
     }
 
     if (__new[id]["deathDate"] != null) {
-        h += "\n<br>\n";
+      h += "\n<br>\n";
     }
 
   }
@@ -428,17 +472,17 @@ a:hover{color:#8866FF}
         }
       }
 
-      h += "</p>\n\n"
+      h += "</p>\n\n";
     }
   }
 
   // maybe add siblings for the gizela matuščinová case
 
-  // add description here
+  h += `<p>${descriptions[id]["description"]}</p>\n\n`;
 
   for (photo of photos) {
     if (photo["links"].includes(id)) {
-        h += `<a href="../photos/${photo["path"]}" target="_blank">\n<img src="../photos/${photo["path"]}" height="500">\n</a>\n\n`
+        h += `<a href="../photos/${photo["path"]}" target="_blank">\n<img src="../photos/${photo["path"]}" height="400">\n</a>\n\n`;
     }
   }
 

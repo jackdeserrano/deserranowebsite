@@ -17,7 +17,7 @@ let old_files_json = fs.readFileSync("photos.json");
 let old_files = JSON.parse(old_files_json);
 
 for (file of files) {
-  old_files.push({path: file, links: []});
+  old_files.push({path: file, links: [], description: ""});
   fs.appendFileSync("photo_list.txt", file + "\n");
 }
 

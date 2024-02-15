@@ -3,60 +3,72 @@
     "path": "angelo_deserrano_1.jpeg",
     "links": [
       "@I0170@"
-    ]
+    ],
+    "description": ""
   },
   {
     "path": "devos_family_1.jpg",
-    "links": []
+    "links": [],
+    "description": ""
   },
   {
     "path": "devos_family_2.jpg",
-    "links": []
+    "links": [],
+    "description": ""
   },
   {
     "path": "emiel_devos_1.jpg",
-    "links": []
+    "links": [],
+    "description": ""
   },
   {
     "path": "emiel_devos_2.jpg",
-    "links": []
+    "links": [],
+    "description": ""
   },
   {
     "path": "emiel_painting_1.jpg",
-    "links": []
+    "links": [],
+    "description": ""
   },
   {
     "path": "emiel_painting_2.jpg",
-    "links": []
+    "links": [],
+    "description": ""
   },
   {
     "path": "fraser_joan_1.jpg",
     "links": [
       "@I0029@",
       "@I0028@"
-    ]
+    ],
+    "description": ""
   },
   {
     "path": "harry_smit_1.jpeg",
     "links": [
       "@I0264@"
-    ]
+    ],
+    "description": ""
   },
   {
     "path": "img_5005.jpg",
-    "links": []
+    "links": [],
+    "description": ""
   },
   {
     "path": "louis_deserrano_1.jpg",
     "links": [
       "@I0005@"
-    ]
+    ],
+    "description": ""
   },
   {
     "path": "marie_philaradie_maddens_1.jpeg",
     "links": [
       "@I0172@"
-    ]
+    ],
+    "description": ""
   },
   {
     "path": "matuscin_christmas_1.jpeg",
@@ -64,37 +76,22 @@
       "@I0045@",
       "@I0046@",
       "@I0006@"
-    ]
+    ],
+    "description": ""
   },
   {
     "path": "ruth_deserrano_1.jpeg",
     "links": [
       "@I0011@"
-    ]
+    ],
+    "description": ""
   },
   {
     "path": "alois_deserrano_1.jpg",
     "links": [
       "@I0160@"
-    ]
-  },
-  {
-    "path": "canada_day_boat_1.jpg",
-    "links": [
-      "@I0002@",
-      "@I0000@",
-      "@I0008@",
-      "@I0028@",
-      "@I0007@",
-      "@I0043@"
-    ]
-  },
-  {
-    "path": "matt_jack_krivoklat_1.jpg",
-    "links": [
-      "@I0027@",
-      "@I0000@"
-    ]
+    ],
+    "description": ""
   },
   {
     "path": "with_slovak_family_1.jpg",
@@ -105,6 +102,17 @@
       "@I0000@",
       "@I0073@",
       "@I0027@"
-    ]
+    ],
+    "description": ""
+  },
+  {
+    "path": "louis_and_allan_deserrano_store_1.jpeg",
+    "links": ["@I0005@","@I0166@"],
+    "description": ""
+  },
+  {
+    "path": "louis_deserrano_summer_88.jpeg",
+    "links": ["@I0005@"],
+    "description": ""
   }
 ]
