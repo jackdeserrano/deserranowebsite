@@ -107,12 +107,39 @@
   },
   {
     "path": "louis_and_allan_deserrano_store_1.jpeg",
-    "links": ["@I0005@","@I0166@"],
+    "links": [
+      "@I0005@",
+      "@I0166@"
+    ],
     "description": ""
   },
   {
     "path": "louis_deserrano_summer_88.jpeg",
-    "links": ["@I0005@"],
+    "links": [
+      "@I0005@"
+    ],
+    "description": ""
+  },
+  {
+    "path": "jack_school_1.jpg",
+    "links": [
+      "@I0000@"
+    ],
+    "description": ""
+  },
+  {
+    "path": "alexander_matuscsin_record.jpg",
+    "links": ["@I0045@","@I0371@","@I0372@"],
+    "description": ""
+  },
+  {
+    "path": "hermina_bjales_birth_record.jpg",
+    "links": ["@I0046@","@I0369@","@I0370@"],
+    "description": ""
+  },
+  {
+    "path": "stephanus_bjales_death_record.jpg",
+    "links": ["@I0369@"],
     "description": ""
   }
 ]
