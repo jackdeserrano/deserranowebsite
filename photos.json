@@ -119,20 +119,5 @@
       "@I0000@"
     ],
     "description": ""
-  },
-  {
-    "path": "alexander_matuscsin_record.jpg",
-    "links": ["@I0045@","@I0371@","@I0372@"],
-    "description": ""
-  },
-  {
-    "path": "hermina_bjales_birth_record.jpg",
-    "links": ["@I0046@","@I0369@","@I0370@"],
-    "description": ""
-  },
-  {
-    "path": "stephanus_bjales_death_record.jpg",
-    "links": ["@I0369@"],
-    "description": ""
   }
 ]
