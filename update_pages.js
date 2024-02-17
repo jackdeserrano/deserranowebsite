@@ -5,7 +5,7 @@
 
 const fs = require("fs");
 
-const FILE = fs.readFileSync("dec302023.ged").toString();
+const FILE = fs.readFileSync("feb172024.ged").toString();
 const NAMES = index_names(FILE);
 
 var ind = /0 (?:(@[_A-Z0-9]*@) )?INDI/;
